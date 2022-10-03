@@ -65,45 +65,45 @@ nnoremap <c-l> <c-w>l<c-w><Esc>
 nnoremap <c-h> <c-w>h<c-w><Esc>
 
 " YAML Editor command functions:
-function RunYAML()
-  sb input.yaml
-  write
-  execute "!timeout 5 yaml-editor RUN"
-endfunction
+"function RunYAML()
+"  sb input.yaml
+"  write
+"  execute "!timeout 5 yaml-editor RUN"
+"endfunction
 
-function WriteTestml()
-  sb input.yaml
-  write
-  rightbelow vsplit `yaml-editor TESTML`
-  wincmd L
-endfunction
+"function WriteTestml()
+"  sb input.yaml
+"  write
+"  rightbelow vsplit `yaml-editor TESTML`
+"  wincmd L
+"endfunction
 
-function SaveTestml()
-  sb input.yaml
-  write
-  let file = system("yaml-editor SAVE")
-  execute "rightbelow vsplit" file
-  wincmd L
-endfunction
+"function SaveTestml()
+"  sb input.yaml
+"  write
+"  let file = system("yaml-editor SAVE")
+"  execute "rightbelow vsplit" file
+"  wincmd L
+"endfunction
 
-function PlayUrl()
-  sb input.yaml
-  write
-  let b64 = get(systemlist("base64 input.yaml | sed ':a;N;$!ba;s/\\n//g'"), 0, "")
-  echom "https://play.yaml.io/main/parser?input=" . b64
-endfunction
+"function PlayUrl()
+"  sb input.yaml
+"  write
+"  let b64 = get(systemlist("base64 input.yaml | sed ':a;N;$!ba;s/\\n//g'"), 0, "")
+"  echom "https://play.yaml.io/main/parser?input=" . b64
+"endfunction
 
-function PlayData()
-  let url = input('Enter YAML Playground URL: ')
-  if !empty(url)
-    sb input
-    normal! gg_dG
-    call setline(1, url)
-    write
-    let x = system("cat input.yaml | sed 's/^[^=]*=//' | base64 -d - | tee input.yaml")
-    edit!
-  endif
-endfunction
+"function PlayData()
+"  let url = input('Enter YAML Playground URL: ')
+"  if !empty(url)
+"    sb input
+"    normal! gg_dG
+"    call setline(1, url)
+"    write
+"    let x = system("cat input.yaml | sed 's/^[^=]*=//' | base64 -d - | tee input.yaml")
+"    edit!
+"  endif
+"endfunction
 
 "runtime! indent/ruby.vim
 "unlet! b:did_indent
